@@ -37,41 +37,44 @@ run = false;
     } 
 
     // Checks to see if pressed key is part of getWord
-    function correctCheck (event) {
+    function correctCheck (pressed) {
         console.log(getWord);
-        if (getWord.indexOf(event.key.toUpperCase()) > -1) {
+        if (getWord.indexOf(pressed.key.toUpperCase()) > -1) {
             //if key is correct, run rightKey function.
             rightKey(event);
 
         } else {
-            console.log("You tried " + event.key.toUpperCase());
+
+            //decrements remainingAttempts if pressed key is -1 or not a part of getWord
+            console.log("You tried " + pressed.key.toUpperCase());
             console.log("wrong letter");
+            remainingAttempts--;
+            console.log(remainingAttempts);
         }
     }
 
     // checks to see if pressed key is a part of hiddenWord
-    function rightKey(event) {
-        
-        if (hiddenWord.indexOf(event.key.toUpperCase()) < 0) {
+    function rightKey(pressed) {
 
-            addKey(event);
+        if (hiddenWord.indexOf(pressed.key.toUpperCase()) < 0) {
+
+            addKey(pressed);
         }
     }
 
     // adds the pressed key to the hiddenword at [i] index if it is correct
-    function addKey(event) {
+    function addKey(pressed) {
 
         for (i = 0; i < getWord.length; i++) {
-            if (event.key.toUpperCase() === getWord[i]) {
+            if (pressed.key.toUpperCase() === getWord[i]) {
 
                 // replaces the hidden[i] with the pressed key
-                hiddenWord[i] = event.key.toUpperCase();
+                hiddenWord[i] = pressed.key.toUpperCase();
 
                 console.log("right letter");
                 console.log("Hidden word is " + hiddenWord);
                 console.log("Game word is " + winWord);
-                console.log("You guessed " + event.key.toUpperCase());
-                console.log(event.key);
+                console.log("You guessed " + pressed.key.toUpperCase());
             }
         }
     }
@@ -83,7 +86,7 @@ run = false;
         run = true; 
         getWord = wordChoices[Math.floor(Math.random() * wordChoices.length)]; //generate random word as an array
         hiddenWord = []; //Array 
-        winWord = []; // 
+        winWord = []; // Array to compare the hiddenWord array later for ultimate victory 
 
         for (var i = 0; i < getWord.length; i++) {
             
