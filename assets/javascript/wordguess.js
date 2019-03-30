@@ -1,55 +1,49 @@
 
-var wordChoices =["SONY","CRASH BANDICOOT","FINAL FANTASY","BLOODBORNE",
-                "NAUGHTY DOG","KINGDOM HEARTS","PLAYSTATION EXPERIENCE",
-                "SPYRO","THE LEGEND OF DRAGOON"];
+var wordChoices =["AXE","BREWMASTER","BRISTLEBACK","LIFESTEALER",
+                "PANGOLIER","SLARK","TERRORBLADE",
+                "SILENCER","TINKER","ENIGMA","BLOODSEEKER","ZEUS"];
 var userChoice = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
                 "U", "V", "W", "X", "Y", "Z"];
 
-
-var hiddenWord = []; // store hidden word
-var winWord = []; // store win word. used to determine victory
-var remainingAttempts = 15; // used to determine when user loses
-getWord = [wordChoices[Math.floor(Math.random() * wordChoices.length)]]; //generate random word
 run = false;
+var winCount = 0;
 
-    // listens for user to press a key
-    document.onkeyup = function (event) {
+    // listens for player to press a key
+    document.onkeyup = function (pressed) {
         
         //Starts a new game
         if (run === true) {
 
-            letterCheck(event);
+            letterCheck(pressed);
         }
 
         else {
+
             newGame();
         }
     }
 
     //Checks to see if pressed key is part of userChoice
-    function letterCheck (event) { 
-        if (userChoice.indexOf(event.key.toUpperCase()) > -1) {
+    function letterCheck (pressed) { 
+        if (userChoice.indexOf(pressed.key.toUpperCase()) > -1) {
 
             // Runs correctCheck function
-            correctCheck(event); 
+            correctCheck(pressed); 
         }
     } 
 
     // Checks to see if pressed key is part of getWord
     function correctCheck (pressed) {
-        console.log(getWord);
+        
         if (getWord.indexOf(pressed.key.toUpperCase()) > -1) {
             //if key is correct, run rightKey function.
-            rightKey(event);
+            rightKey(pressed);
+        }
 
-        } else {
-
-            //decrements remainingAttempts if pressed key is -1 or not a part of getWord
-            console.log("You tried " + pressed.key.toUpperCase());
-            console.log("wrong letter");
-            remainingAttempts--;
-            console.log(remainingAttempts);
+        else {
+            //if key is not valid, run wrongKey function
+            wrongKey(pressed);
         }
     }
 
@@ -58,54 +52,102 @@ run = false;
 
         if (hiddenWord.indexOf(pressed.key.toUpperCase()) < 0) {
 
+            console.log(getWord);
+            console.log(hiddenWord);
+            
             addKey(pressed);
+
         }
+    }
+
+    //if the pressed key is incorrect, this will decrease remainingAttempts by 1
+    function wrongKey(pressed) {
+        //decrements remainingAttempts if pressed key is -1 or not a part of getWord
+        remainingAttempts--;
+
+        var guessCount = document.getElementById("tried-letters");
+        guessCount.textContent = remainingAttempts;
+
+        console.log("You tried " + pressed.key.toUpperCase());
+        console.log(getWord);
+        console.log(hiddenWord);
+        console.log("You have " + remainingAttempts + " guesses.");
+
+        loseCheck(pressed);
     }
 
     // adds the pressed key to the hiddenword at [i] index if it is correct
     function addKey(pressed) {
-
         for (i = 0; i < getWord.length; i++) {
+
             if (pressed.key.toUpperCase() === getWord[i]) {
 
                 // replaces the hidden[i] with the pressed key
                 hiddenWord[i] = pressed.key.toUpperCase();
+                lettersLeft--;
 
-                console.log("right letter");
-                console.log("Hidden word is " + hiddenWord);
-                console.log("Game word is " + winWord);
-                console.log("You guessed " + pressed.key.toUpperCase());
+                var hiddenLetters = document.getElementById("hidden-letters");
+                hiddenLetters.textContent = hiddenWord;
+
+                console.log(hiddenWord);
+                console.log(lettersLeft + " this many letters left.");
+
             }
+
+            winCheck(pressed);
+
         }
     }
 
-    
+    // checks to see if lettersLeft is 0. if it is, the user wins
+    function winCheck() {
+        if (lettersLeft === 0) {
+            winCount++;
+            console.log("you are the ultimate winner. hurray!");
+            console.log("Wins: " + winCount);
+
+            var winUp = document.getElementById("win-count");
+                winUp.textContent = winCount;
+
+  
+            var hiddenLetters = document.getElementById("hidden-letters");
+            hiddenLetters.textContent = hiddenWord;
+
+            run = false;
+            return run;
+
+        }
+
+    }
+
+    // checks to see if the remainingAttempts is 0. If 0, user loses and newGame function starts
+    function loseCheck() {
+        if (remainingAttempts === 0) {
+            console.log("you lost and you suck at guessing.");
+
+            newGame();
+        }
+    }
 
     // function to create a new game with a new word
-    function newGame() {     
+    function newGame() {   
+
         run = true; 
         getWord = wordChoices[Math.floor(Math.random() * wordChoices.length)]; //generate random word as an array
-        hiddenWord = []; //Array 
-        winWord = []; // Array to compare the hiddenWord array later for ultimate victory 
+        hiddenWord = []; 
+        lettersLeft = getWord.length;
+        remainingAttempts = 15;
 
-        for (var i = 0; i < getWord.length; i++) {
-            
-            if (getWord[i] === " ") {
-                hiddenWord.push(" ");
-            }
-
-            else {
-                hiddenWord.push("_");
-            }  
-        }
-
-        for (var i = 0; i < getWord.length; i++) {
-            
-            winWord.push(getWord[i]);
-
-        }
         
-        return getWord, hiddenWord, winWord;
-    }
+        for (var i = 0; i < getWord.length; i++) {
+        
+                hiddenWord.push("_"); 
 
+            var hiddenLetters = document.getElementById("hidden-letters");
+                hiddenLetters.textContent = hiddenWord;
+        }
+        var guessedLetters = document.getElementById("tried-letters");
+            guessedLetters.textContent = remainingAttempts;
+        return getWord, hiddenWord, lettersLeft;
+    }
     
