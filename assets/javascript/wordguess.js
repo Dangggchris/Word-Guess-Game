@@ -1,7 +1,11 @@
 
 var wordChoices =["AXE","BREWMASTER","BRISTLEBACK","LIFESTEALER",
                 "PANGOLIER","SLARK","TERRORBLADE",
-                "SILENCER","TINKER","ENIGMA","BLOODSEEKER","ZEUS"];
+                "SILENCER","TINKER","ENIGMA","BLOODSEEKER","ZEUS", "INVOKER",
+                "WEAVER","CENTAUR","VIPER","VENOMANCER","PUDGE", "ENCHANTRESS",
+                "BEASTMASTER","TIMBERSAW","OMNIKNIGHT","LYCAN","LICH","VISAGE",
+                "MEDUSA","JAKIRO"];
+
 var userChoice = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
                 "U", "V", "W", "X", "Y", "Z"];
@@ -20,6 +24,7 @@ var winCount = 0;
 
         else {
 
+            // starts a new game if game status is still false
             newGame();
         }
     }
@@ -52,9 +57,7 @@ var winCount = 0;
 
         if (hiddenWord.indexOf(pressed.key.toUpperCase()) < 0) {
 
-            console.log(getWord);
-            console.log(hiddenWord);
-            
+            // add pressed key into hiddenWord
             addKey(pressed);
 
         }
@@ -102,9 +105,8 @@ var winCount = 0;
     // checks to see if lettersLeft is 0. if it is, the user wins
     function winCheck() {
         if (lettersLeft === 0) {
+            lettersLeft = -1; 
             winCount++;
-            console.log("you are the ultimate winner. hurray!");
-            console.log("Wins: " + winCount);
 
             var winUp = document.getElementById("win-count");
                 winUp.textContent = winCount;
@@ -113,12 +115,12 @@ var winCount = 0;
             var hiddenLetters = document.getElementById("hidden-letters");
             hiddenLetters.textContent = hiddenWord;
 
+            // stops game until a key is pressed
             run = false;
-            return run;
 
-        }
-
+        }  
     }
+
 
     // checks to see if the remainingAttempts is 0. If 0, user loses and newGame function starts
     function loseCheck() {
@@ -128,6 +130,7 @@ var winCount = 0;
             newGame();
         }
     }
+    
 
     // function to create a new game with a new word
     function newGame() {   
@@ -140,8 +143,21 @@ var winCount = 0;
 
         
         for (var i = 0; i < getWord.length; i++) {
-        
-                hiddenWord.push("_"); 
+            
+            // * still work in progress for multiple words. *
+            // replaces letter with a space or underscore
+            // if (getWord[i] === " ") {
+            //     hiddenWord.push(" ");
+
+            //     // decrease length by 1 because of the space otherwise length = 1 and user won't ever win
+            //     lettersLeft = [getWord.length - 1];
+            //     console.log("Letters left " + lettersLeft);
+            // }
+            // else {
+                
+            // }
+
+            hiddenWord.push("_"); 
 
             var hiddenLetters = document.getElementById("hidden-letters");
                 hiddenLetters.textContent = hiddenWord;
