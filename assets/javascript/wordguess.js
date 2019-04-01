@@ -1,10 +1,31 @@
-
-var wordChoices =["AXE","BREWMASTER","BRISTLEBACK","LIFESTEALER",
-                "PANGOLIER","SLARK","TERRORBLADE",
-                "SILENCER","TINKER","ENIGMA","BLOODSEEKER","ZEUS", "INVOKER",
-                "WEAVER","CENTAUR","VIPER","VENOMANCER","PUDGE", "ENCHANTRESS",
-                "BEASTMASTER","TIMBERSAW","OMNIKNIGHT","LYCAN","LICH","VISAGE",
-                "MEDUSA","JAKIRO"];
+// somehow add images associated to hero name later
+var heroes = [  {name: 'AXE', image: "../images/axe.png"},
+                {name: 'BREWMASTER', image: "../images/axe.png"},
+                {name: 'LIFESTEALER', image: "../images/axe.png"},
+                {name: 'BRISTLEBACK', image: "../images/axe.png"},
+                {name: 'PANGOLIER', image: "../images/axe.png"},
+                {name: 'SLARK', image: "../images/axe.png"},
+                {name: 'TERRORBLADE', image: "../images/axe.png"},
+                {name: 'SILENCER', image: "../images/axe.png"},
+                {name: 'TINKER', image: "../images/axe.png"},
+                {name: 'ENIGMA', image: "../images/axe.png"},
+                {name: 'BLOODSEEKER', image: "../images/axe.png"},
+                {name: 'ZEUS', image: "../images/axe.png"},
+                {name: 'INVOKER', image: "../images/axe.png"},
+                {name: 'WEAVER', image: "../images/axe.png"},
+                {name: 'CENTAUR', image: "../images/axe.png"},
+                {name: 'VIPER', image: "../images/axe.png"},
+                {name: 'VENOMANCER', image: "../images/axe.png"},
+                {name: 'PUDGE', image: "../images/axe.png"},
+                {name: 'ENCHANTRESS', image: "../images/axe.png"},
+                {name: 'BEASTMASTER', image: "../images/axe.png"},
+                {name: 'TIMBERSAW', image: "../images/axe.png"},
+                {name: 'OMNIKNIGHT', image: "../images/axe.png"},
+                {name: 'LYCAN', image: "../images/axe.png"},
+                {name: 'LICH', image: "../images/axe.png"},
+                {name: 'VISAGE', image: "../images/axe.png"},
+                {name: 'MEDUSA', image: "../images/axe.png"},
+                {name: 'JAKIRO', image: "../images/axe.png"}];
 
 var userChoice = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
@@ -12,6 +33,7 @@ var userChoice = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 
 run = false;
 var winCount = 0;
+console.log("Don't look here, you cheater!")
 
     // listens for player to press a key
     document.onkeyup = function (pressed) {
@@ -136,7 +158,17 @@ var winCount = 0;
     function newGame() {   
 
         run = true; 
-        getWord = wordChoices[Math.floor(Math.random() * wordChoices.length)]; //generate random word as an array
+        // random index number
+        object = (heroes[Math.floor(Math.random() * heroes.length)])
+
+        // grab word and image using index number
+        getWord = object.name;
+        getImage = object.image;
+
+        var heroImage = document.getElementById("hero-image");
+        heroImage.appendChild = getImage;
+
+        console.log("This is the word: " + getWord);
         hiddenWord = []; 
         lettersLeft = getWord.length;
         remainingAttempts = 15;
