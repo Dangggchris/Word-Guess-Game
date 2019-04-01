@@ -29,6 +29,7 @@ var heroes = [  {name: 'AXE', image: "assets/images/axe.png"},
 
 var emblem = "assets/images/emblem.png";
 
+// starting image before random hero
 var startImage = document.getElementById("hero-image");
     startImage.src = emblem;
 
