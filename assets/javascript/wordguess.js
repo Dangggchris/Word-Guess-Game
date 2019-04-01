@@ -1,31 +1,36 @@
-// somehow add images associated to hero name later
-var heroes = [  {name: 'AXE', image: "../images/axe.png"},
-                {name: 'BREWMASTER', image: "../images/axe.png"},
-                {name: 'LIFESTEALER', image: "../images/axe.png"},
-                {name: 'BRISTLEBACK', image: "../images/axe.png"},
-                {name: 'PANGOLIER', image: "../images/axe.png"},
-                {name: 'SLARK', image: "../images/axe.png"},
-                {name: 'TERRORBLADE', image: "../images/axe.png"},
-                {name: 'SILENCER', image: "../images/axe.png"},
-                {name: 'TINKER', image: "../images/axe.png"},
-                {name: 'ENIGMA', image: "../images/axe.png"},
-                {name: 'BLOODSEEKER', image: "../images/axe.png"},
-                {name: 'ZEUS', image: "../images/axe.png"},
-                {name: 'INVOKER', image: "../images/axe.png"},
-                {name: 'WEAVER', image: "../images/axe.png"},
-                {name: 'CENTAUR', image: "../images/axe.png"},
-                {name: 'VIPER', image: "../images/axe.png"},
-                {name: 'VENOMANCER', image: "../images/axe.png"},
-                {name: 'PUDGE', image: "../images/axe.png"},
-                {name: 'ENCHANTRESS', image: "../images/axe.png"},
-                {name: 'BEASTMASTER', image: "../images/axe.png"},
-                {name: 'TIMBERSAW', image: "../images/axe.png"},
-                {name: 'OMNIKNIGHT', image: "../images/axe.png"},
-                {name: 'LYCAN', image: "../images/axe.png"},
-                {name: 'LICH', image: "../images/axe.png"},
-                {name: 'VISAGE', image: "../images/axe.png"},
-                {name: 'MEDUSA', image: "../images/axe.png"},
-                {name: 'JAKIRO', image: "../images/axe.png"}];
+// add images associated to hero name later
+var heroes = [  {name: 'AXE', image: "assets/images/axe.png"},
+                {name: 'BREWMASTER', image: "assets/images/brew.png"},
+                {name: 'LIFESTEALER', image: "assets/images/lifestealer.png"},
+                {name: 'BRISTLEBACK', image: "assets/images/bristle.png"},
+                {name: 'PANGOLIER', image: "assets/images/pango.png"},
+                {name: 'SLARK', image: "assets/images/slark.png"},
+                {name: 'TERRORBLADE', image: "assets/images/terror.png"},
+                {name: 'SILENCER', image: "assets/images/silencer.png"},
+                {name: 'TINKER', image: "assets/images/tinker.png"},
+                {name: 'ENIGMA', image: "assets/images/enigma.png"},
+                {name: 'BLOODSEEKER', image: "assets/images/blood.png"},
+                {name: 'ZEUS', image: "assets/images/zeus.png"},
+                {name: 'INVOKER', image: "assets/images/invoker.png"},
+                {name: 'WEAVER', image: "assets/images/weaver.png"},
+                {name: 'CENTAUR', image: "assets/images/centaur.png"},
+                {name: 'VIPER', image: "assets/images/viper.png"},
+                {name: 'VENOMANCER', image: "assets/images/venomancer.png"},
+                {name: 'PUDGE', image: "assets/images/pudge.png"},
+                {name: 'ENCHANTRESS', image: "assets/images/enchantress.png"},
+                {name: 'BEASTMASTER', image: "assets/images/beast.png"},
+                {name: 'TIMBERSAW', image: "assets/images/timber.png"},
+                {name: 'OMNIKNIGHT', image: "assets/images/omni.png"},
+                {name: 'LYCAN', image: "assets/images/lycan.png"},
+                {name: 'LICH', image: "assets/images/lich.png"},
+                {name: 'VISAGE', image: "assets/images/visage.png"},
+                {name: 'MEDUSA', image: "assets/images/medusa.png"},
+                {name: 'JAKIRO', image: "assets/images/jakiro.png"}];
+
+var emblem = "assets/images/emblem.png";
+
+var startImage = document.getElementById("hero-image");
+    startImage.src = emblem;
 
 var userChoice = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
@@ -166,7 +171,7 @@ console.log("Don't look here, you cheater!")
         getImage = object.image;
 
         var heroImage = document.getElementById("hero-image");
-        heroImage.appendChild = getImage;
+        heroImage.src = getImage;
 
         console.log("This is the word: " + getWord);
         hiddenWord = []; 
@@ -176,8 +181,8 @@ console.log("Don't look here, you cheater!")
         
         for (var i = 0; i < getWord.length; i++) {
             
-            // * still work in progress for multiple words. *
-            // replaces letter with a space or underscore
+            // // * still work in progress for multiple words. *
+            // // replaces letter with a space or underscore
             // if (getWord[i] === " ") {
             //     hiddenWord.push(" ");
 
